@@ -71,7 +71,6 @@ function Dashboard() {
 
       {/* Page Content */}
       <div className="dashboard-content">
-        <h1 className="dashboard-title">Welcome to the Dashboard</h1>
       </div>
 
       {/* Footer */}

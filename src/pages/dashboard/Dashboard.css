@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%);
+  background: #ffffff;
   padding: 20px;
 }
 
@@ -14,26 +14,26 @@
   flex: 1; /* push footer to bottom */
 }
 
-.dashboard-title {
-  margin: 0;
-  font-size: 32px;
-  font-weight: 700;
-  color: #ffffff;
-}
 
 .logout-button {
   margin-top: 24px;
-  padding: 10px 18px;
+  padding: 14px 24px;
   border-radius: 12px;
-  border: 1px solid #dc2626;
-  background: #ef4444;
+  border: 2px solid #dc2626;
+  background: #dc2626;
   color: #ffffff;
   font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
 }
 
 .logout-button:hover {
-  background: #dc2626;
+  background: #b91c1c;
+  border-color: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
 }
 
 /* Navbar */
@@ -41,10 +41,14 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(17, 24, 39, 0.7); /* slate-900 with opacity */
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .nav-inner {
@@ -55,10 +59,11 @@
 }
 
 .nav-brand {
-  color: #f8fafc;
-  font-weight: 800;
-  letter-spacing: 0.4px;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   cursor: pointer;
+  font-size: 1.5rem;
 }
 
 .nav-toggle {
@@ -69,8 +74,8 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.18);
   cursor: pointer;
 }
 
@@ -101,10 +106,11 @@
   display: none;
   flex-direction: column;
   gap: 8px;
-  background: rgba(17, 24, 39, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
   padding: 12px;
+  backdrop-filter: blur(20px);
 }
 
 .nav-links.open {
@@ -116,7 +122,7 @@
   border-radius: 10px;
   border: 1px solid transparent;
   background: transparent;
-  color: #e5e7eb;
+  color: #ffffff;
   font-weight: 600;
   cursor: pointer;
   text-align: left;
@@ -144,9 +150,11 @@
 /* Clock */
 .nav-clock {
   display: block;
-  color: #f8fafc;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.5rem;
 }
 
 /* Remove mobile-specific clock styling since only one clock remains */
@@ -164,9 +172,14 @@
 /* Footer */
 .dashboard-footer {
   margin-top: 24px;
-  background: rgba(17, 24, 39, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .footer-inner {
@@ -174,8 +187,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  color: #e5e7eb;
-  font-weight: 600;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: -0.01em;
 }
 
 .footer-left,
@@ -195,15 +210,21 @@
 /* Desktop layout */
 .logout-button.nav {
   margin-top: 0;
-  padding: 8px 14px;
+  padding: 12px 20px;
   border-radius: 10px;
-  border: 1px solid rgba(239, 68, 68, 0.6);
-  background: rgba(239, 68, 68, 0.2);
-  color: #fee2e2;
+  border: 2px solid #dc2626;
+  background: #dc2626;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
 }
 
 .logout-button.nav:hover {
-  background: rgba(239, 68, 68, 0.35);
+  background: #b91c1c;
+  border-color: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
 }
 
 @media (min-width: 768px) {
@@ -232,8 +253,9 @@
     display: block;
     flex: 1;
     text-align: center;
-  font-size: 28px;
-  font-weight: 800;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
   }
 }
 
