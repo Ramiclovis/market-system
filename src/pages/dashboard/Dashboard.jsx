@@ -73,6 +73,15 @@ function Dashboard() {
       <div className="dashboard-content">
         <h1 className="dashboard-title">Welcome to the Dashboard</h1>
       </div>
+
+      {/* Footer */}
+      <footer className="dashboard-footer">
+        <div className="footer-inner">
+          <div className="footer-left">© {new Date().getFullYear()} Market System</div>
+          <div className="footer-center">All rights reserved</div>
+          <div className="footer-right">v1.0.0</div>
+        </div>
+      </footer>
     </div>
   );
 }
