@@ -8,10 +8,19 @@
   padding: 20px;
 }
 
+.dashboard-container > .dashboard-content {
+  flex: 1;
+}
+
+.dashboard-container > .dashboard-footer {
+  margin-top: auto;
+}
+
 .dashboard-content {
   text-align: center;
-  margin-top: 80px; /* space below navbar */
+  margin-top: 20px; /* space below navbar */
   flex: 1; /* push footer to bottom */
+  padding-bottom: 20px;
 }
 
 
@@ -171,7 +180,7 @@
 }
 /* Footer */
 .dashboard-footer {
-  margin-top: 24px;
+  margin-top: 40px;
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -180,6 +189,8 @@
     0 25px 50px rgba(0, 0, 0, 0.15),
     0 0 0 1px rgba(255, 255, 255, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
 }
 
 .footer-inner {
@@ -227,7 +238,217 @@
   box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
 }
 
-@media (min-width: 768px) {
+/* Modules Grid */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Module Cards */
+.module-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 160px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.module-card:hover::before {
+  opacity: 1;
+}
+
+.module-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Module Icons */
+.module-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.module-icon svg {
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
+
+.module-card:hover .module-icon {
+  transform: scale(1.1);
+}
+
+.module-card:hover .module-icon svg {
+  transform: rotate(5deg);
+}
+
+/* Module Titles */
+.module-title {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+  opacity: 0.95;
+  transition: all 0.3s ease;
+}
+
+.module-card:hover .module-title {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Unified Module Colors */
+.module-card.users,
+.module-card.customers,
+.module-card.suppliers,
+.module-card.invoices,
+.module-card.materials,
+.module-card.services,
+.module-card.warehouse,
+.module-card.financial-entries,
+.module-card.vouchers,
+.module-card.chart,
+.module-card.accounting,
+.module-card.categories,
+.module-card.agencies,
+.module-card.reports,
+.module-card.regions,
+.module-card.settings {
+  background: linear-gradient(135deg, rgba(30, 60, 114, 0.8) 0%, rgba(42, 82, 152, 0.8) 100%);
+}
+
+.module-card.users .module-icon,
+.module-card.customers .module-icon,
+.module-card.suppliers .module-icon,
+.module-card.invoices .module-icon,
+.module-card.materials .module-icon,
+.module-card.services .module-icon,
+.module-card.warehouse .module-icon,
+.module-card.financial-entries .module-icon,
+.module-card.vouchers .module-icon,
+.module-card.chart .module-icon,
+.module-card.accounting .module-icon,
+.module-card.categories .module-icon,
+.module-card.agencies .module-icon,
+.module-card.reports .module-icon,
+.module-card.regions .module-icon,
+.module-card.settings .module-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.module-card.users .module-title,
+.module-card.customers .module-title,
+.module-card.suppliers .module-title,
+.module-card.invoices .module-title,
+.module-card.materials .module-title,
+.module-card.services .module-title,
+.module-card.warehouse .module-title,
+.module-card.financial-entries .module-title,
+.module-card.vouchers .module-title,
+.module-card.chart .module-title,
+.module-card.accounting .module-title,
+.module-card.categories .module-title,
+.module-card.agencies .module-title,
+.module-card.reports .module-title,
+.module-card.regions .module-title,
+.module-card.settings .module-title {
+  color: #ffffff;
+}
+
+/* Responsive Design */
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .modules-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .module-card {
+    min-height: 120px;
+    padding: 20px;
+  }
+  
+  .module-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+  }
+  
+  .module-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .module-title {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modules-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .module-card {
+    min-height: 100px;
+    padding: 18px;
+  }
+  
+  .module-icon {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 10px;
+  }
+  
+  .module-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .module-title {
+    font-size: 0.9rem;
+  }
+}
+
+  @media (min-width: 768px) {
   .nav-toggle {
     display: none;
   }
