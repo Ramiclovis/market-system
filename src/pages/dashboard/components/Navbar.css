@@ -3,10 +3,10 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(17, 24, 39, 0.7); /* slate-900 with opacity */
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
   backdrop-filter: blur(8px);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .nav-inner {
@@ -17,7 +17,7 @@
 }
 
 .nav-brand {
-  color: #f8fafc;
+  color: #ffffff;
   font-weight: 800;
   letter-spacing: 0.4px;
   cursor: pointer;
@@ -26,10 +26,10 @@
 /* Clock */
 .nav-clock {
   display: block;
-  color: #f8fafc;
+  color: #ffffff;
   font-weight: 700;
   letter-spacing: 0.5px;
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 800;
   text-align: center;
   flex: 1;
@@ -39,15 +39,17 @@
   margin-top: 0;
   padding: 8px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(239, 68, 68, 0.6);
-  background: rgba(239, 68, 68, 0.2);
-  color: #fee2e2;
+  border: 1px solid #dc2626;
+  background: #ef4444;
+  color: #ffffff;
   cursor: pointer;
   font-weight: 600;
 }
 
 .logout-button.nav:hover {
-  background: rgba(239, 68, 68, 0.35);
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }
 
 /* Logout Confirmation Modal */

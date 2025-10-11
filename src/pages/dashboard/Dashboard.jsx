@@ -17,7 +17,6 @@ function Dashboard() {
 
       {/* Page Content */}
       <div className="dashboard-content">
-        <h1 className="dashboard-title">Welcome to the Dashboard</h1>
         <div className="modules-grid">
           <div className="module-card users" onClick={handleUsersClick}>
             <div className="module-icon">
