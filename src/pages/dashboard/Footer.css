@@ -1,0 +1,30 @@
+/* Footer */
+.dashboard-footer {
+  margin-top: 24px;
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  color: #e5e7eb;
+  font-weight: 600;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  opacity: 0.9;
+}
+
+@media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+}
