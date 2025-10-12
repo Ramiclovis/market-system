@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../dashboard/components/Navbar";
+import Footer from "../dashboard/components/Footer";
 import "./UsersTable.css";
 
 function UsersTable() {
@@ -7,73 +9,73 @@ function UsersTable() {
   const [users] = useState([
     {
       id: 1,
-      name: "أحمد محمد",
+      name: "Ahmed Mohamed",
       email: "ahmed@example.com",
-      role: "مدير المبيعات",
-      status: "نشط",
+      role: "Sales Manager",
+      status: "Active",
       joinDate: "2024-01-15",
       phone: "01234567890"
     },
     {
       id: 2,
-      name: "فاطمة علي",
+      name: "Fatima Ali",
       email: "fatima@example.com",
-      role: "محاسبة",
-      status: "نشط",
+      role: "Accountant",
+      status: "Active",
       joinDate: "2024-02-10",
       phone: "01234567891"
     },
     {
       id: 3,
-      name: "محمد حسن",
+      name: "Mohamed Hassan",
       email: "mohamed@example.com",
-      role: "مطور",
-      status: "غير نشط",
+      role: "Developer",
+      status: "Inactive",
       joinDate: "2024-01-20",
       phone: "01234567892"
     },
     {
       id: 4,
-      name: "سارة أحمد",
+      name: "Sara Ahmed",
       email: "sara@example.com",
-      role: "مديرة التسويق",
-      status: "نشط",
+      role: "Marketing Manager",
+      status: "Active",
       joinDate: "2024-03-05",
       phone: "01234567893"
     },
     {
       id: 5,
-      name: "خالد يوسف",
+      name: "Khaled Youssef",
       email: "khaled@example.com",
-      role: "مدير الموارد البشرية",
-      status: "نشط",
+      role: "HR Manager",
+      status: "Active",
       joinDate: "2024-02-28",
       phone: "01234567894"
     },
     {
       id: 6,
-      name: "نور محمد",
+      name: "Nour Mohamed",
       email: "nour@example.com",
-      role: "مصممة جرافيك",
-      status: "غير نشط",
+      role: "Graphic Designer",
+      status: "Inactive",
       joinDate: "2024-01-10",
       phone: "01234567895"
     },
     {
       id: 7,
-      name: "عمر حسام",
+      name: "Omar Hossam",
       email: "omar@example.com",
-      role: "مطور واجهات",
-      status: "نشط",
+      role: "Frontend Developer",
+      status: "Active",
       joinDate: "2024-03-15",
       phone: "01234567896"
     },
     {
       id: 8,
-      name: "ليلى عبدالله",
+      name: "Layla Abdullah",
       email: "layla@example.com",
-      role: "محللة بيانات",
-      status: "نشط",
+      role: "Data Analyst",
+      status: "Active",
       joinDate: "2024-02-20",
       phone: "01234567897"
     }
@@ -97,39 +99,41 @@ function UsersTable() {
 
   return (
     <div className="users-table-container">
-      {/* Header */}
-      <header className="users-header">
-        <div className="header-content">
-          <button onClick={handleBack} className="back-button">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-            </svg>
-            العودة للداشبورد
-          </button>
-          <h1 className="page-title">إدارة المستخدمين</h1>
-          <button className="add-user-button">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-            </svg>
-            إضافة مستخدم جديد
-          </button>
-        </div>
-      </header>
-
+      <Navbar />
+      
       {/* Table Container */}
       <div className="table-container">
         <div className="table-wrapper">
+          {/* Header */}
+          <div className="users-header">
+            <div className="header-content">
+              <button onClick={handleBack} className="back-button">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Back to Dashboard
+              </button>
+              <h1 className="page-title">User Management</h1>
+              <button className="add-user-button">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+                Add New User
+              </button>
+            </div>
+          </div>
+
           <table className="users-table">
             <thead>
               <tr>
-                <th>الرقم</th>
-                <th>الاسم</th>
-                <th>البريد الإلكتروني</th>
-                <th>الوظيفة</th>
-                <th>رقم الهاتف</th>
-                <th>تاريخ الانضمام</th>
-                <th>الحالة</th>
-                <th>العمليات</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Phone</th>
+                <th>Join Date</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -142,7 +146,7 @@ function UsersTable() {
                   <td className="user-phone">{user.phone}</td>
                   <td>{user.joinDate}</td>
                   <td>
-                    <span className={`status ${user.status === "نشط" ? "active" : "inactive"}`}>
+                    <span className={`status ${user.status === "Active" ? "active" : "inactive"}`}>
                       {user.status}
                     </span>
                   </td>
@@ -174,13 +178,7 @@ function UsersTable() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="users-footer">
-        <div className="footer-content">
-          <p>إجمالي المستخدمين: {users.length}</p>
-          <p>المستخدمون النشطون: {users.filter(user => user.status === "نشط").length}</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
