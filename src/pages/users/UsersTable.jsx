@@ -21,7 +21,7 @@ function UsersTable() {
     confirmPassword: ""
   });
   
-  const [users] = useState([
+  const [users, setUsers] = useState([
     {
       id: 1,
       name: "Ahmed Mohamed",
@@ -145,8 +145,8 @@ function UsersTable() {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log("Delete user:", user);
-        // Add delete logic here
+        // Delete user from state
+        setUsers(prevUsers => prevUsers.filter(u => u.id !== user.id));
         
         Swal.fire({
           title: 'Deleted!',
@@ -189,23 +189,71 @@ function UsersTable() {
     if (!isEditMode || newUser.password) {
       // Validate password match
       if (newUser.password !== newUser.confirmPassword) {
-        alert("Passwords do not match!");
+        Swal.fire({
+          title: 'Error!',
+          text: 'Passwords do not match!',
+          icon: 'error',
+          confirmButtonColor: '#ef4444'
+        });
         return;
       }
       
       // Validate password length
       if (newUser.password.length < 6) {
-        alert("Password must be at least 6 characters long!");
+        Swal.fire({
+          title: 'Error!',
+          text: 'Password must be at least 6 characters long!',
+          icon: 'error',
+          confirmButtonColor: '#ef4444'
+        });
         return;
       }
     }
     
     if (isEditMode) {
-      console.log("Edit user:", selectedUser.id, newUser);
-      // Add edit logic here
+      // Update existing user
+      setUsers(prevUsers => 
+        prevUsers.map(user => 
+          user.id === selectedUser.id 
+            ? {
+                ...user,
+                name: newUser.name,
+                email: newUser.email,
+                role: newUser.role,
+                phone: newUser.phone,
+                joinDate: newUser.joinDate,
+                status: newUser.status
+              }
+            : user
+        )
+      );
+      
+      Swal.fire({
+        title: 'Updated!',
+        text: `User ${newUser.name} has been updated successfully.`,
+        icon: 'success',
+        confirmButtonColor: '#10b981'
+      });
     } else {
-      console.log("Add new user:", newUser);
-      // Add user logic here
+      // Add new user
+      const newUserData = {
+        id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+        name: newUser.name,
+        email: newUser.email,
+        role: newUser.role,
+        phone: newUser.phone,
+        joinDate: newUser.joinDate,
+        status: newUser.status
+      };
+      
+      setUsers(prevUsers => [...prevUsers, newUserData]);
+      
+      Swal.fire({
+        title: 'Success!',
+        text: `User ${newUser.name} has been added successfully.`,
+        icon: 'success',
+        confirmButtonColor: '#10b981'
+      });
     }
     
     handleCloseModal();
