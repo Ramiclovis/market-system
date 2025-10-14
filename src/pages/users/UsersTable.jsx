@@ -66,42 +66,8 @@ function UsersTable() {
       joinDate: "2024-03-15",
       phone: "01234567894"
     },
-    {
-      id: 6,
-      name: "Nora Ali",
-      email: "nora@example.com",
-      role: "Administrator",
-      status: "Active",
-      joinDate: "2024-02-28",
-      phone: "01234567895"
-    },
-    {
-      id: 7,
-      name: "Khaled Hassan",
-      email: "khaled@example.com",
-      role: "Developer",
-      status: "Active",
-      joinDate: "2024-03-20",
-      phone: "01234567896"
-    },
-    {
-      id: 8,
-      name: "Layla Mohamed",
-      email: "layla@example.com",
-      role: "Sales Manager",
-      status: "Inactive",
-      joinDate: "2024-01-10",
-      phone: "01234567897"
-    },
-    {
-      id: 9,
-      name: "Youssef Ahmed",
-      email: "youssef@example.com",
-      role: "Accountant",
-      status: "Active",
-      joinDate: "2024-03-25",
-      phone: "01234567898"
-    }
+ 
+   
   ]);
 
   const handleBack = () => {

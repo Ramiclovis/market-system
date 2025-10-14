@@ -98,6 +98,34 @@ function CategoriesTable() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Get main categories (categories without parent)
+    const mainCategories = categories.filter(c => !c.parentId);
+
+    // Validation: Cannot add sub category if no main categories exist
+    if (!isEditMode && newCategory.parentId && mainCategories.length === 0) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'You must add a Main Category first before adding Sub Categories!',
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+      });
+      return;
+    }
+
+    // Validation: Check if parent ID exists when adding sub category
+    if (newCategory.parentId) {
+      const parentExists = categories.some(c => c.id.toString() === newCategory.parentId.toString());
+      if (!parentExists) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'The specified Parent Category does not exist!',
+          icon: 'error',
+          confirmButtonColor: '#ef4444'
+        });
+        return;
+      }
+    }
+
     if (isEditMode) {
       setCategories(prev => prev.map(c => c.id === selectedCategory.id ? {
         ...c,
@@ -253,7 +281,7 @@ function CategoriesTable() {
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM7 17h10v-2H7v2zm0-4h10v-2H7v2zm0-6v2h10V7H7z"/>
                     </svg>
-                    <span>Description</span>
+                    <span>Description (Optional)</span>
                   </label>
                   <input
                     type="text"
@@ -261,8 +289,7 @@ function CategoriesTable() {
                     name="description"
                     value={newCategory.description}
                     onChange={handleInputChange}
-                    placeholder="Enter description"
-                    required
+                    placeholder="Enter description (optional)"
                   />
                 </div>
 
@@ -271,16 +298,29 @@ function CategoriesTable() {
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
                     </svg>
-                    <span>Parent ID</span>
+                    <span>Parent Category (Optional - For Sub Categories)</span>
                   </label>
-                  <input
-                    type="text"
+                  <select
                     id="parentId"
                     name="parentId"
                     value={newCategory.parentId}
                     onChange={handleInputChange}
-                    placeholder="Optional: parent category ID"
-                  />
+                  >
+                    <option value="">None (This is a Main Category)</option>
+                    {categories
+                      .filter(c => !c.parentId && (!isEditMode || c.id !== selectedCategory?.id))
+                      .map(c => (
+                        <option key={c.id} value={c.id}>
+                          {c.name} (ID: {c.id})
+                        </option>
+                      ))
+                    }
+                  </select>
+                  {categories.filter(c => !c.parentId).length === 0 && !isEditMode && (
+                    <small style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '0.25rem', display: 'block' }}>
+                      ⚠️ No Main Categories available. Add a Main Category first!
+                    </small>
+                  )}
                 </div>
 
                 <div className="form-group">
