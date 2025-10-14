@@ -4,6 +4,7 @@ import Login from "./pages/auth/login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import UsersTable from "./pages/users/UsersTable";
 import CategoriesTable from "./pages/categories/CategoriesTable";
+import CompaniesTable from "./pages/companies/CompaniesTable";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/users" element={<UsersTable />} />
         <Route path="/categories" element={<CategoriesTable />} />
+        <Route path="/companies" element={<CompaniesTable />} />
         <Route path="*" element={<Login />} />
       </Routes>
     </BrowserRouter>
