@@ -11,6 +11,10 @@ function Dashboard() {
     navigate("/users");
   };
 
+  const handleCategoriesClick = () => {
+    navigate("/categories");
+  };
+
   return (
     <div className="dashboard-container">
       <Navbar />
@@ -25,6 +29,14 @@ function Dashboard() {
               </svg>
             </div>
             <h3 className="module-title">Users</h3>
+          </div>
+          <div className="module-card users" onClick={handleCategoriesClick}>
+            <div className="module-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 5h18v2H3V5zm0 6h18v2H3v-2zm0 6h18v2H3v-2z"/>
+              </svg>
+            </div>
+            <h3 className="module-title">Categories</h3>
           </div>
         </div>
       </div>

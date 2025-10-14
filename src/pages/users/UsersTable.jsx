@@ -4,7 +4,6 @@ import Navbar from "../dashboard/components/Navbar";
 import Footer from "../dashboard/components/Footer";
 import Swal from 'sweetalert2';
 import "./UsersTable.css";
-
 function UsersTable() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
