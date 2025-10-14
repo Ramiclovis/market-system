@@ -15,10 +15,8 @@ function CompaniesTable() {
     email: "",
     phone: "",
     address: "",
-    taxNumber: "",
     website: "",
-    status: "Active",
-    registrationDate: ""
+    status: "Active"
   });
   
   const [companies, setCompanies] = useState([
@@ -28,10 +26,8 @@ function CompaniesTable() {
       email: "info@alnajah.com",
       phone: "01234567890",
       address: "القاهرة، مصر",
-      taxNumber: "123-456-789",
       website: "www.alnajah.com",
-      status: "Active",
-      registrationDate: "2024-01-15"
+      status: "Active"
     },
     {
       id: 2,
@@ -39,10 +35,8 @@ function CompaniesTable() {
       email: "contact@alamal.com",
       phone: "01234567891",
       address: "الإسكندرية، مصر",
-      taxNumber: "987-654-321",
       website: "www.alamal.com",
-      status: "Active",
-      registrationDate: "2024-02-10"
+      status: "Active"
     },
     {
       id: 3,
@@ -50,10 +44,8 @@ function CompaniesTable() {
       email: "info@almostaqbal.com",
       phone: "01234567892",
       address: "الجيزة، مصر",
-      taxNumber: "456-789-123",
       website: "www.almostaqbal.com",
-      status: "Inactive",
-      registrationDate: "2024-01-20"
+      status: "Inactive"
     },
     {
       id: 4,
@@ -61,10 +53,8 @@ function CompaniesTable() {
       email: "info@techsolutions.com",
       phone: "01234567893",
       address: "دبي، الإمارات",
-      taxNumber: "321-654-987",
       website: "www.techsolutions.com",
-      status: "Active",
-      registrationDate: "2024-03-05"
+      status: "Active"
     },
     {
       id: 5,
@@ -72,10 +62,8 @@ function CompaniesTable() {
       email: "info@modernbuild.com",
       phone: "01234567894",
       address: "الرياض، السعودية",
-      taxNumber: "789-123-456",
       website: "www.modernbuild.com",
-      status: "Active",
-      registrationDate: "2024-03-15"
+      status: "Active"
     }
   ]);
 
@@ -91,10 +79,8 @@ function CompaniesTable() {
       email: company.email,
       phone: company.phone,
       address: company.address,
-      taxNumber: company.taxNumber,
       website: company.website,
-      status: company.status,
-      registrationDate: company.registrationDate
+      status: company.status
     });
     setIsModalOpen(true);
   };
@@ -141,10 +127,8 @@ function CompaniesTable() {
       email: "",
       phone: "",
       address: "",
-      taxNumber: "",
       website: "",
-      status: "Active",
-      registrationDate: ""
+      status: "Active"
     });
   };
 
@@ -182,10 +166,8 @@ function CompaniesTable() {
                 email: newCompany.email,
                 phone: newCompany.phone,
                 address: newCompany.address,
-                taxNumber: newCompany.taxNumber,
                 website: newCompany.website,
-                status: newCompany.status,
-                registrationDate: newCompany.registrationDate
+                status: newCompany.status
               }
             : company
         )
@@ -205,10 +187,8 @@ function CompaniesTable() {
         email: newCompany.email,
         phone: newCompany.phone,
         address: newCompany.address,
-        taxNumber: newCompany.taxNumber,
         website: newCompany.website,
-        status: newCompany.status,
-        registrationDate: newCompany.registrationDate
+        status: newCompany.status
       };
       
       setCompanies(prevCompanies => [...prevCompanies, newCompanyData]);
@@ -258,9 +238,7 @@ function CompaniesTable() {
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Address</th>
-                <th>Tax Number</th>
                 <th>Website</th>
-                <th>Registration Date</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
@@ -273,9 +251,7 @@ function CompaniesTable() {
                   <td className="company-email">{company.email}</td>
                   <td className="company-phone">{company.phone}</td>
                   <td className="company-address">{company.address}</td>
-                  <td>{company.taxNumber}</td>
                   <td className="company-website">{company.website}</td>
-                  <td>{company.registrationDate}</td>
                   <td>
                     <span className={`status ${company.status === "Active" ? "active" : "inactive"}`}>
                       {company.status}
@@ -397,24 +373,6 @@ function CompaniesTable() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="taxNumber">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-                    </svg>
-                    <span>Tax Number</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="taxNumber"
-                    name="taxNumber"
-                    value={newCompany.taxNumber}
-                    onChange={handleInputChange}
-                    placeholder="Enter tax number"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
                   <label htmlFor="website">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/>
@@ -428,23 +386,6 @@ function CompaniesTable() {
                     value={newCompany.website}
                     onChange={handleInputChange}
                     placeholder="Enter website URL"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="registrationDate">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                    </svg>
-                    <span>Registration Date</span>
-                  </label>
-                  <input
-                    type="date"
-                    id="registrationDate"
-                    name="registrationDate"
-                    value={newCompany.registrationDate}
-                    onChange={handleInputChange}
                     required
                   />
                 </div>
