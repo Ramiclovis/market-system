@@ -398,6 +398,20 @@
   margin-bottom: 20px;
 }
 
+/* Suppliers specific table styles - Center alignment */
+.suppliers-table th {
+  text-align: center !important;
+}
+
+.suppliers-table td {
+  text-align: center !important;
+}
+
+.suppliers-table th:first-child,
+.suppliers-table td:first-child {
+  text-align: center !important;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;

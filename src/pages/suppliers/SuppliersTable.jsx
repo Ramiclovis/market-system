@@ -13,7 +13,6 @@ function SuppliersTable() {
   const [newSupplier, setNewSupplier] = useState({
     supplier_name: "",
     supplier_phone: "",
-    supplier_email: "",
     supplier_address: "",
     supplier_type: "Manufacturer",
     pricing_method: "Fixed",
@@ -41,7 +40,6 @@ function SuppliersTable() {
     setNewSupplier({
       supplier_name: supplier.supplier_name,
       supplier_phone: supplier.supplier_phone,
-      supplier_email: supplier.supplier_email,
       supplier_address: supplier.supplier_address,
       supplier_type: supplier.supplier_type,
       pricing_method: supplier.pricing_method,
@@ -88,7 +86,6 @@ function SuppliersTable() {
     setNewSupplier({
       supplier_name: "",
       supplier_phone: "",
-      supplier_email: "",
       supplier_address: "",
       supplier_type: "Manufacturer",
       pricing_method: "Fixed",
@@ -109,12 +106,6 @@ function SuppliersTable() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (newSupplier.supplier_email && !emailRegex.test(newSupplier.supplier_email)) {
-      Swal.fire({ title: 'Error!', text: 'Please enter a valid email address!', icon: 'error', confirmButtonColor: '#ef4444' });
-      return;
-    }
 
     if (isEditMode) {
       setSuppliers(prev => prev.map(s => s.id === selectedSupplier.id ? { ...s, ...newSupplier } : s));
@@ -152,13 +143,12 @@ function SuppliersTable() {
             </div>
           </div>
 
-          <table className="users-table">
+          <table className="users-table suppliers-table">
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Phone</th>
-                <th>Email</th>
                 <th>Address</th>
                 <th>Type</th>
                 <th>Pricing</th>
@@ -176,7 +166,6 @@ function SuppliersTable() {
                   <td>{supplier.id}</td>
                   <td className="user-name">{supplier.supplier_name}</td>
                   <td className="user-email">{supplier.supplier_phone}</td>
-                  <td>{supplier.supplier_email || '-'}</td>
                   <td className="user-email">{supplier.supplier_address || '-'}</td>
                   <td>{supplier.supplier_type}</td>
                   <td>{supplier.pricing_method}</td>
@@ -226,7 +215,7 @@ function SuppliersTable() {
             </div>
 
             <form onSubmit={handleSubmit} className="modal-form">
-              <div className="form-grid">
+              <div className="suppliers-form-grid">
                 <div className="form-group">
                   <label htmlFor="supplier_name">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -245,16 +234,6 @@ function SuppliersTable() {
                     <span>Phone</span>
                   </label>
                   <input type="tel" id="supplier_phone" name="supplier_phone" value={newSupplier.supplier_phone} onChange={handleInputChange} placeholder="Enter phone number" required />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="supplier_email">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                    <span>Email</span>
-                  </label>
-                  <input type="email" id="supplier_email" name="supplier_email" value={newSupplier.supplier_email} onChange={handleInputChange} placeholder="Enter email" />
                 </div>
 
                 <div className="form-group">
