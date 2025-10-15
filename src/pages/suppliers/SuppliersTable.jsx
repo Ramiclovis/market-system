@@ -226,7 +226,7 @@ function SuppliersTable() {
             </div>
 
             <form onSubmit={handleSubmit} className="modal-form">
-              <div className="suppliers-form-grid">
+              <div className="form-grid">
                 <div className="form-group">
                   <label htmlFor="supplier_name">
                     <svg viewBox="0 0 24 24" fill="currentColor">
