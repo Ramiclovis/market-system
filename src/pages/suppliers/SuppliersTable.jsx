@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../dashboard/components/Navbar";
 import Footer from "../dashboard/components/Footer";
 import Swal from 'sweetalert2';
-import "../categories/CategoriesTable.css";
+import "./SuppliersTable.css";
 
 function SuppliersTable() {
   const navigate = useNavigate();
@@ -167,8 +167,6 @@ function SuppliersTable() {
                 <th>Notes</th>
                 <th>Company ID</th>
                 <th>Status</th>
-                <th>Created At</th>
-                <th>Updated At</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -191,8 +189,6 @@ function SuppliersTable() {
                       {supplier.is_active}
                     </span>
                   </td>
-                  <td>{supplier.created_at}</td>
-                  <td>{supplier.updated_at}</td>
                   <td className="actions">
                     <button onClick={(e) => handleDelete(e, supplier)} className="action-btn delete" title="Delete">
                       <svg viewBox="0 0 24 24" fill="currentColor">
@@ -230,7 +226,7 @@ function SuppliersTable() {
             </div>
 
             <form onSubmit={handleSubmit} className="modal-form">
-              <div className="form-grid">
+              <div className="suppliers-form-grid">
                 <div className="form-group">
                   <label htmlFor="supplier_name">
                     <svg viewBox="0 0 24 24" fill="currentColor">
