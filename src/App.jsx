@@ -5,6 +5,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import UsersTable from "./pages/users/UsersTable";
 import CategoriesTable from "./pages/categories/CategoriesTable";
 import CompaniesTable from "./pages/companies/CompaniesTable";
+import SuppliersTable from "./pages/suppliers/SuppliersTable";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/users" element={<UsersTable />} />
         <Route path="/categories" element={<CategoriesTable />} />
         <Route path="/companies" element={<CompaniesTable />} />
+        <Route path="/suppliers" element={<SuppliersTable />} />
         <Route path="*" element={<Login />} />
       </Routes>
     </BrowserRouter>
