@@ -11,7 +11,7 @@
 /* Header */
 .companies-header {
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%);
-  padding: 20px;
+  padding: 12px 20px;
   border-radius: 20px 20px 0 0;
 }
 
@@ -166,7 +166,7 @@
 }
 
 .companies-table th {
-  padding: 18px 12px;
+  padding: 12px 10px;
   text-align: left;
   color: #ffffff;
   font-weight: 600;
@@ -200,11 +200,11 @@
 }
 
 .companies-table td {
-  padding: 16px 12px;
+  padding: 10px 10px;
   text-align: left;
   color: #374151;
   vertical-align: middle;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .company-name {
@@ -347,7 +347,7 @@
 
 .modal-header {
   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-  padding: 30px 40px;
+  padding: 20px 30px;
   border-radius: 24px 24px 0 0;
   display: flex;
   align-items: center;
@@ -357,7 +357,7 @@
 
 .modal-title {
   color: #ffffff;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 700;
   margin: 0;
   display: flex;
@@ -395,26 +395,26 @@
 }
 
 .modal-form {
-  padding: 25px 30px;
+  padding: 20px 25px;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-  margin-bottom: 25px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .form-group label {
   color: #1e3c72 !important;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -430,10 +430,10 @@
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 10px 14px;
+  padding: 8px 12px;
   border: 2px solid #e5e7eb;
-  border-radius: 10px;
-  font-size: 0.95rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
   color: #374151;
   background: #ffffff;
   transition: all 0.3s ease;
@@ -462,9 +462,9 @@
 
 .modal-actions {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   justify-content: flex-end;
-  padding-top: 15px;
+  padding-top: 12px;
   border-top: 2px solid #f1f5f9;
 }
 
@@ -473,10 +473,10 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 24px;
+  padding: 8px 20px;
   border: none;
-  border-radius: 10px;
-  font-size: 0.95rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;

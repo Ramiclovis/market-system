@@ -220,7 +220,6 @@ function CompaniesTable() {
                 </svg>
                 Back to Dashboard
               </button>
-              <h1 className="page-title">Company Management</h1>
               <button className="add-company-button" onClick={handleOpenModal}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
