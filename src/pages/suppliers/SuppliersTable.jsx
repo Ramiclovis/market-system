@@ -25,6 +25,15 @@ function SuppliersTable() {
     updated_at: ""
   });
 
+  // قائمة الشركات
+  const companies = [
+    { id: "1", name: "شركة النجاح للتجارة" },
+    { id: "2", name: "مؤسسة الأمل التجارية" },
+    { id: "3", name: "شركة المستقبل للاستثمار" },
+    { id: "4", name: "Tech Solutions Corp" },
+    { id: "5", name: "شركة البناء الحديث" }
+  ];
+
   const [suppliers, setSuppliers] = useState([
     { id: 1, supplier_name: "Global Supplies Co.", supplier_phone: "01000000001", supplier_email: "contact@globalsupplies.com", supplier_address: "Cairo, Egypt", supplier_type: "Distributor", pricing_method: "Discount Tier", payment_method: "Credit", products_type: "Food & Beverages", supplier_notes: "Preferred for beverages.", company_id: "1", is_active: "Active", created_at: "2024-01-05", updated_at: "2024-01-20" },
     { id: 2, supplier_name: "Tech Parts LLC", supplier_phone: "01000000002", supplier_email: "sales@techparts.com", supplier_address: "Dubai, UAE", supplier_type: "Manufacturer", pricing_method: "Fixed", payment_method: "Cash", products_type: "Electronics", supplier_notes: "Lead time 2 weeks.", company_id: "2", is_active: "Inactive", created_at: "2024-02-10", updated_at: "2024-03-01" }
@@ -32,6 +41,12 @@ function SuppliersTable() {
 
   const handleBack = () => {
     navigate("/dashboard");
+  };
+
+  // الحصول على اسم الشركة من ID
+  const getCompanyName = (companyId) => {
+    const company = companies.find(c => c.id === companyId);
+    return company ? company.name : '-';
   };
 
   const handleRowClick = (supplier) => {
@@ -154,7 +169,7 @@ function SuppliersTable() {
                 <th>Payment</th>
                 <th>Products Type</th>
                 <th>Notes</th>
-                <th>Company ID</th>
+                <th>Company</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
@@ -171,7 +186,7 @@ function SuppliersTable() {
                   <td>{supplier.payment_method}</td>
                   <td>{supplier.products_type || '-'}</td>
                   <td className="user-email">{supplier.supplier_notes || '-'}</td>
-                  <td>{supplier.company_id || '-'}</td>
+                  <td>{getCompanyName(supplier.company_id)}</td>
                   <td>
                     <span className={`status ${supplier.is_active === "Active" ? "active" : "inactive"}`}>
                       {supplier.is_active}
@@ -313,9 +328,16 @@ function SuppliersTable() {
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
                     </svg>
-                    <span>Company ID</span>
+                    <span>Company</span>
                   </label>
-                  <input type="text" id="company_id" name="company_id" value={newSupplier.company_id} onChange={handleInputChange} placeholder="Related company ID" />
+                  <select id="company_id" name="company_id" value={newSupplier.company_id} onChange={handleInputChange}>
+                    <option value="">Select a company (Optional)</option>
+                    {companies.map((company) => (
+                      <option key={company.id} value={company.id}>
+                        {company.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div className="form-group">
