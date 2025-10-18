@@ -6,6 +6,7 @@ import UsersTable from "./pages/users/UsersTable";
 import CategoriesTable from "./pages/categories/CategoriesTable";
 import CompaniesTable from "./pages/companies/CompaniesTable";
 import SuppliersTable from "./pages/suppliers/SuppliersTable";
+import BrandsTable from "./pages/brands/BrandsTable";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/categories" element={<CategoriesTable />} />
         <Route path="/companies" element={<CompaniesTable />} />
         <Route path="/suppliers" element={<SuppliersTable />} />
+        <Route path="/brands" element={<BrandsTable />} />
         <Route path="*" element={<Login />} />
       </Routes>
     </BrowserRouter>
