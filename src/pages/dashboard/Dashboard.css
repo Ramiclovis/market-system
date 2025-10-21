@@ -4,8 +4,9 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  background: #ffffff;
+  background: var(--bg-primary);
   padding: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .dashboard-content {
@@ -156,4 +157,17 @@
 .module-card.units:hover {
   background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
   box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4);
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .dashboard-container {
+  background: var(--bg-primary);
+}
+
+[data-theme="dark"] .module-card {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .module-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
 }

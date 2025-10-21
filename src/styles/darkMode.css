@@ -1,0 +1,128 @@
+/* Dark Mode Global Styles */
+
+/* Tables Container */
+[data-theme="dark"] .brands-table-container,
+[data-theme="dark"] .products-table-container,
+[data-theme="dark"] .categories-table-container,
+[data-theme="dark"] .companies-table-container,
+[data-theme="dark"] .suppliers-table-container,
+[data-theme="dark"] .units-table-container,
+[data-theme="dark"] .users-table-container {
+  background: var(--bg-primary);
+}
+
+/* Table Wrapper */
+[data-theme="dark"] .table-wrapper {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: 0 10px 25px var(--shadow);
+}
+
+/* Table */
+[data-theme="dark"] table tbody tr {
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] table td {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .brand-name,
+[data-theme="dark"] .product-name,
+[data-theme="dark"] .category-name,
+[data-theme="dark"] .company-name,
+[data-theme="dark"] .unit-name,
+[data-theme="dark"] .user-name {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .brand-description,
+[data-theme="dark"] .user-email,
+[data-theme="dark"] .company-email {
+  color: var(--text-secondary);
+}
+
+/* Modal */
+[data-theme="dark"] .modal-overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .modal-container {
+  background: var(--card-bg);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .modal-form {
+  background: var(--card-bg);
+}
+
+[data-theme="dark"] .form-group label {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .form-group label svg {
+  color: var(--text-primary) !important;
+  fill: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .form-group textarea {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group select:focus,
+[data-theme="dark"] .form-group textarea:focus {
+  background: var(--bg-secondary);
+  border-color: #2a5298;
+  box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.2);
+}
+
+[data-theme="dark"] .form-group input::placeholder,
+[data-theme="dark"] .form-group textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+[data-theme="dark"] .modal-actions {
+  border-top-color: var(--border-color);
+}
+
+/* Footer */
+[data-theme="dark"] .footer {
+  background: var(--card-bg);
+  border-top-color: var(--border-color);
+}
+
+[data-theme="dark"] .footer p {
+  color: var(--text-secondary);
+}
+
+/* Login Page */
+[data-theme="dark"] .login-page {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+[data-theme="dark"] .login-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .login-title {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .login-subtitle {
+  color: var(--text-secondary);
+}
+
