@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../dashboard/components/Navbar";
 import Footer from "../dashboard/components/Footer";
 import Swal from 'sweetalert2';
+import { getCompanyList, getCompanyNameById, initialSuppliers } from "../../data/sharedData";
 import "./SuppliersTable.css";
 
 function SuppliersTable() {
@@ -25,28 +26,19 @@ function SuppliersTable() {
     updated_at: ""
   });
 
-  // قائمة الشركات
-  const companies = [
-    { id: "1", name: "شركة النجاح للتجارة" },
-    { id: "2", name: "مؤسسة الأمل التجارية" },
-    { id: "3", name: "شركة المستقبل للاستثمار" },
-    { id: "4", name: "Tech Solutions Corp" },
-    { id: "5", name: "شركة البناء الحديث" }
-  ];
+  // Get companies list from shared data
+  const companies = getCompanyList();
 
-  const [suppliers, setSuppliers] = useState([
-    { id: 1, supplier_name: "Global Supplies Co.", supplier_phone: "01000000001", supplier_email: "contact@globalsupplies.com", supplier_address: "Cairo, Egypt", supplier_type: "Distributor", pricing_method: "Discount Tier", payment_method: "Credit", products_type: "Food & Beverages", supplier_notes: "Preferred for beverages.", company_id: "1", is_active: "Active", created_at: "2024-01-05", updated_at: "2024-01-20" },
-    { id: 2, supplier_name: "Tech Parts LLC", supplier_phone: "01000000002", supplier_email: "sales@techparts.com", supplier_address: "Dubai, UAE", supplier_type: "Manufacturer", pricing_method: "Fixed", payment_method: "Cash", products_type: "Electronics", supplier_notes: "Lead time 2 weeks.", company_id: "2", is_active: "Inactive", created_at: "2024-02-10", updated_at: "2024-03-01" }
-  ]);
+  // Initialize suppliers from shared data
+  const [suppliers, setSuppliers] = useState(initialSuppliers);
 
   const handleBack = () => {
     navigate("/dashboard");
   };
 
-  // الحصول على اسم الشركة من ID
+  // Get company name by ID
   const getCompanyName = (companyId) => {
-    const company = companies.find(c => c.id === companyId);
-    return company ? company.name : '-';
+    return getCompanyNameById(Number(companyId)) || '-';
   };
 
   const handleRowClick = (supplier) => {

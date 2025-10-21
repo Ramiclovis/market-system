@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../dashboard/components/Navbar";
 import Footer from "../dashboard/components/Footer";
 import Swal from 'sweetalert2';
+import { getCompanyList, getCompanyNameById, initialBrands } from "../../data/sharedData";
 import "./BrandsTable.css";
 
 function BrandsTable() {
@@ -19,70 +20,18 @@ function BrandsTable() {
     updated_at: ""
   });
 
-  // Sample companies data - in real application, this would come from API/props
-  const companies = [
-    { id: 1, name: "شركة النجاح للتجارة" },
-    { id: 2, name: "مؤسسة الأمل التجارية" },
-    { id: 3, name: "شركة المستقبل للاستثمار" },
-    { id: 4, name: "Tech Solutions Corp" },
-    { id: 5, name: "شركة البناء الحديث" }
-  ];
+  // Get companies list from shared data
+  const companies = getCompanyList();
   
-  const [brands, setBrands] = useState([
-    {
-      id: 1,
-      brand_name: "Premium Brand",
-      company_id: 1,
-      description: "High quality products",
-      is_active: "Active",
-      created_at: "2024-01-15",
-      updated_at: "2024-02-20"
-    },
-    {
-      id: 2,
-      brand_name: "Elite Series",
-      company_id: 2,
-      description: "Premium product line",
-      is_active: "Active",
-      created_at: "2024-02-01",
-      updated_at: "2024-03-15"
-    },
-    {
-      id: 3,
-      brand_name: "Classic Collection",
-      company_id: 1,
-      description: "Traditional quality products",
-      is_active: "Inactive",
-      created_at: "2024-01-20",
-      updated_at: "2024-02-10"
-    },
-    {
-      id: 4,
-      brand_name: "Tech Pro",
-      company_id: 4,
-      description: "Advanced technology products",
-      is_active: "Active",
-      created_at: "2024-03-01",
-      updated_at: "2024-03-25"
-    },
-    {
-      id: 5,
-      brand_name: "Modern Line",
-      company_id: 5,
-      description: "Contemporary design products",
-      is_active: "Active",
-      created_at: "2024-02-15",
-      updated_at: "2024-03-10"
-    }
-  ]);
+  // Initialize brands from shared data
+  const [brands, setBrands] = useState(initialBrands);
 
   const handleBack = () => {
     navigate("/dashboard");
   };
 
   const getCompanyName = (companyId) => {
-    const company = companies.find(c => c.id === companyId);
-    return company ? company.name : "Unknown";
+    return getCompanyNameById(companyId);
   };
 
   const handleRowClick = (brand) => {
@@ -371,7 +320,7 @@ function BrandsTable() {
                   </select>
                 </div>
 
-                <div className="form-group full-width">
+                <div className="form-group ">
                   <label htmlFor="description">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                       <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM7 17h10v-2H7v2zm0-4h10v-2H7v2zm0-6v2h10V7H7z"/>

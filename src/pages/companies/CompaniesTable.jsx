@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../dashboard/components/Navbar";
 import Footer from "../dashboard/components/Footer";
 import Swal from 'sweetalert2';
+import { initialCompanies } from "../../data/sharedData";
 import "./CompaniesTable.css";
 
 function CompaniesTable() {
@@ -19,53 +20,8 @@ function CompaniesTable() {
     status: "Active"
   });
   
-  const [companies, setCompanies] = useState([
-    {
-      id: 1,
-      name: "شركة النجاح للتجارة",
-      email: "info@alnajah.com",
-      phone: "01234567890",
-      address: "القاهرة، مصر",
-      website: "www.alnajah.com",
-      status: "Active"
-    },
-    {
-      id: 2,
-      name: "مؤسسة الأمل التجارية",
-      email: "contact@alamal.com",
-      phone: "01234567891",
-      address: "الإسكندرية، مصر",
-      website: "www.alamal.com",
-      status: "Active"
-    },
-    {
-      id: 3,
-      name: "شركة المستقبل للاستثمار",
-      email: "info@almostaqbal.com",
-      phone: "01234567892",
-      address: "الجيزة، مصر",
-      website: "www.almostaqbal.com",
-      status: "Inactive"
-    },
-    {
-      id: 4,
-      name: "Tech Solutions Corp",
-      email: "info@techsolutions.com",
-      phone: "01234567893",
-      address: "دبي، الإمارات",
-      website: "www.techsolutions.com",
-      status: "Active"
-    },
-    {
-      id: 5,
-      name: "شركة البناء الحديث",
-      email: "info@modernbuild.com",
-      phone: "01234567894",
-      address: "الرياض، السعودية",
-      website: "www.modernbuild.com",
-      status: "Active"
-    }
-  ]);
+  // Initialize companies from shared data
+  const [companies, setCompanies] = useState(initialCompanies);
 
   const handleBack = () => {
     navigate("/dashboard");

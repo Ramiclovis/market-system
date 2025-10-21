@@ -8,6 +8,7 @@ import CompaniesTable from "./pages/companies/CompaniesTable";
 import SuppliersTable from "./pages/suppliers/SuppliersTable";
 import BrandsTable from "./pages/brands/BrandsTable";
 import UnitsTable from "./pages/units/UnitsTable";
+import ProductsTable from "./pages/products/ProductsTable";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/suppliers" element={<SuppliersTable />} />
         <Route path="/brands" element={<BrandsTable />} />
         <Route path="/units" element={<UnitsTable />} />
+        <Route path="/products" element={<ProductsTable />} />
         <Route path="*" element={<Login />} />
       </Routes>
     </BrowserRouter>
