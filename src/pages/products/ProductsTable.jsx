@@ -1,13 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import Navbar from "../dashboard/components/Navbar";
 import Footer from "../dashboard/components/Footer";
-import Swal from 'sweetalert2';
-import { getBrandList, getBrandNameById, getSupplierList, getSupplierNameById } from "../../data/sharedData";
+import { 
+  getBrandList, 
+  getBrandNameById, 
+  getSupplierList, 
+  getSupplierNameById,
+  initialProducts 
+} from "../../data/sharedData";
 import "./ProductsTable.css";
 
 function ProductsTable() {
+  // ============================================
+  // HOOKS
+  // ============================================
   const navigate = useNavigate();
+
+  // ============================================
+  // STATE MANAGEMENT
+  // ============================================
+  const [products, setProducts] = useState(initialProducts);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -25,7 +40,9 @@ function ProductsTable() {
     updated_at: ""
   });
 
-  // Sample data for dropdowns
+  // ============================================
+  // STATIC DATA
+  // ============================================
   const categories = [
     { id: 1, name: "Electronics" },
     { id: 2, name: "Furniture" },
@@ -34,12 +51,6 @@ function ProductsTable() {
     { id: 5, name: "Office Supplies" }
   ];
 
-  // Get suppliers list from shared data
-  const suppliers = getSupplierList();
-
-  // Get brands list from shared data
-  const brands = getBrandList();
-
   const units = [
     { id: 1, name: "Piece" },
     { id: 2, name: "Kilogram" },
@@ -47,84 +58,13 @@ function ProductsTable() {
     { id: 4, name: "Box" },
     { id: 5, name: "Meter" }
   ];
-  
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      product_name: "Laptop Computer",
-      category_id: 1,
-      supplier_id: 1,
-      brand_id: 4,
-      unit_id: 1,
-      barcode: "1234567890123",
-      purchase_price: 800.00,
-      selling_price: 1200.00,
-      status: "Active",
-      created_at: "2024-01-15",
-      updated_at: "2024-02-20"
-    },
-    {
-      id: 2,
-      product_name: "Office Desk",
-      category_id: 2,
-      supplier_id: 3,
-      brand_id: 5,
-      unit_id: 1,
-      barcode: "1234567890124",
-      purchase_price: 150.00,
-      selling_price: 250.00,
-      status: "Active",
-      created_at: "2024-02-01",
-      updated_at: "2024-03-15"
-    },
-    {
-      id: 3,
-      product_name: "Cotton T-Shirt",
-      category_id: 3,
-      supplier_id: 2,
-      brand_id: 3,
-      unit_id: 1,
-      barcode: "1234567890125",
-      purchase_price: 10.00,
-      selling_price: 25.00,
-      status: "Active",
-      created_at: "2024-01-20",
-      updated_at: "2024-02-10"
-    },
-    {
-      id: 4,
-      product_name: "Coffee Beans",
-      category_id: 4,
-      supplier_id: 4,
-      brand_id: 1,
-      unit_id: 2,
-      barcode: "1234567890126",
-      purchase_price: 15.00,
-      selling_price: 30.00,
-      status: "Inactive",
-      created_at: "2024-03-01",
-      updated_at: "2024-03-25"
-    },
-    {
-      id: 5,
-      product_name: "Notebook A4",
-      category_id: 5,
-      supplier_id: 5,
-      brand_id: 2,
-      unit_id: 1,
-      barcode: "1234567890127",
-      purchase_price: 2.00,
-      selling_price: 5.00,
-      status: "Active",
-      created_at: "2024-02-15",
-      updated_at: "2024-03-10"
-    }
-  ]);
 
-  const handleBack = () => {
-    navigate("/dashboard");
-  };
+  const suppliers = getSupplierList();
+  const brands = getBrandList();
 
+  // ============================================
+  // HELPER FUNCTIONS
+  // ============================================
   const getCategoryName = (categoryId) => {
     const category = categories.find(c => c.id === categoryId);
     return category ? category.name : "Unknown";
@@ -141,6 +81,115 @@ function ProductsTable() {
   const getUnitName = (unitId) => {
     const unit = units.find(u => u.id === unitId);
     return unit ? unit.name : "Unknown";
+  };
+
+  const resetProductForm = () => {
+    setNewProduct({
+      product_name: "",
+      category_id: "",
+      supplier_id: "",
+      brand_id: "",
+      unit_id: "",
+      barcode: "",
+      purchase_price: "",
+      selling_price: "",
+      status: "Active",
+      created_at: "",
+      updated_at: ""
+    });
+  };
+
+  // ============================================
+  // VALIDATION FUNCTIONS
+  // ============================================
+  const validateRequiredFields = () => {
+    if (!newProduct.category_id || !newProduct.supplier_id || !newProduct.brand_id || !newProduct.unit_id) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please fill in all required fields!',
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const validatePrices = () => {
+    const purchasePrice = parseFloat(newProduct.purchase_price);
+    const sellingPrice = parseFloat(newProduct.selling_price);
+
+    if (purchasePrice < 0 || sellingPrice < 0) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Prices cannot be negative!',
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const validateDates = () => {
+    if (new Date(newProduct.updated_at) < new Date(newProduct.created_at)) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Updated date cannot be earlier than created date!',
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const checkPriceWarning = (callback) => {
+    const purchasePrice = parseFloat(newProduct.purchase_price);
+    const sellingPrice = parseFloat(newProduct.selling_price);
+
+    if (sellingPrice < purchasePrice) {
+      Swal.fire({
+        title: 'Warning!',
+        text: 'Selling price is lower than purchase price. Continue?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#f59e0b',
+        cancelButtonColor: '#6b7280',
+        confirmButtonText: 'Yes, continue!',
+        cancelButtonText: 'Cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          callback();
+        }
+      });
+      return false;
+    }
+    return true;
+  };
+
+  // ============================================
+  // NAVIGATION HANDLERS
+  // ============================================
+  const handleBack = () => {
+    navigate("/dashboard");
+  };
+
+  // ============================================
+  // MODAL HANDLERS
+  // ============================================
+  const handleOpenModal = () => {
+    setIsEditMode(false);
+    setSelectedProduct(null);
+    resetProductForm();
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setIsEditMode(false);
+    setSelectedProduct(null);
+    resetProductForm();
   };
 
   const handleRowClick = (product) => {
@@ -162,28 +211,102 @@ function ProductsTable() {
     setIsModalOpen(true);
   };
 
-  const handleOpenModal = () => {
-    setIsEditMode(false);
-    setSelectedProduct(null);
-    setNewProduct({
-      product_name: "",
-      category_id: "",
-      supplier_id: "",
-      brand_id: "",
-      unit_id: "",
-      barcode: "",
-      purchase_price: "",
-      selling_price: "",
-      status: "Active",
-      created_at: "",
-      updated_at: ""
+  // ============================================
+  // FORM HANDLERS
+  // ============================================
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewProduct(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate all fields
+    if (!validateRequiredFields()) return;
+    if (!validatePrices()) return;
+    if (!validateDates()) return;
+
+    // Check price warning and save
+    if (checkPriceWarning(saveProduct)) {
+      saveProduct();
+    }
+  };
+
+  // ============================================
+  // CRUD OPERATIONS
+  // ============================================
+  const saveProduct = () => {
+    if (isEditMode) {
+      updateProduct();
+    } else {
+      addProduct();
+    }
+    handleCloseModal();
+  };
+
+  const addProduct = () => {
+    const newProductData = {
+      id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+      product_name: newProduct.product_name,
+      category_id: parseInt(newProduct.category_id),
+      supplier_id: parseInt(newProduct.supplier_id),
+      brand_id: parseInt(newProduct.brand_id),
+      unit_id: parseInt(newProduct.unit_id),
+      barcode: newProduct.barcode,
+      purchase_price: parseFloat(newProduct.purchase_price),
+      selling_price: parseFloat(newProduct.selling_price),
+      status: newProduct.status,
+      created_at: newProduct.created_at,
+      updated_at: newProduct.updated_at
+    };
+
+    setProducts(prevProducts => [...prevProducts, newProductData]);
+
+    Swal.fire({
+      title: 'Success!',
+      text: `Product ${newProduct.product_name} has been added successfully.`,
+      icon: 'success',
+      confirmButtonColor: '#10b981'
     });
-    setIsModalOpen(true);
+  };
+
+  const updateProduct = () => {
+    setProducts(prevProducts =>
+      prevProducts.map(product =>
+        product.id === selectedProduct.id
+          ? {
+              ...product,
+              product_name: newProduct.product_name,
+              category_id: parseInt(newProduct.category_id),
+              supplier_id: parseInt(newProduct.supplier_id),
+              brand_id: parseInt(newProduct.brand_id),
+              unit_id: parseInt(newProduct.unit_id),
+              barcode: newProduct.barcode,
+              purchase_price: parseFloat(newProduct.purchase_price),
+              selling_price: parseFloat(newProduct.selling_price),
+              status: newProduct.status,
+              created_at: newProduct.created_at,
+              updated_at: newProduct.updated_at
+            }
+          : product
+      )
+    );
+
+    Swal.fire({
+      title: 'Updated!',
+      text: `Product ${newProduct.product_name} has been updated successfully.`,
+      icon: 'success',
+      confirmButtonColor: '#10b981'
+    });
   };
 
   const handleDelete = (e, product) => {
     e.stopPropagation();
-    
+
     Swal.fire({
       title: 'Are you sure?',
       text: `Do you want to delete product ${product.product_name}?`,
@@ -196,7 +319,7 @@ function ProductsTable() {
     }).then((result) => {
       if (result.isConfirmed) {
         setProducts(prevProducts => prevProducts.filter(p => p.id !== product.id));
-        
+
         Swal.fire({
           title: 'Deleted!',
           text: `Product ${product.product_name} has been deleted.`,
@@ -207,157 +330,13 @@ function ProductsTable() {
     });
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setIsEditMode(false);
-    setSelectedProduct(null);
-    setNewProduct({
-      product_name: "",
-      category_id: "",
-      supplier_id: "",
-      brand_id: "",
-      unit_id: "",
-      barcode: "",
-      purchase_price: "",
-      selling_price: "",
-      status: "Active",
-      created_at: "",
-      updated_at: ""
-    });
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewProduct(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    // Validate required fields
-    if (!newProduct.category_id || !newProduct.supplier_id || !newProduct.brand_id || !newProduct.unit_id) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Please fill in all required fields!',
-        icon: 'error',
-        confirmButtonColor: '#ef4444'
-      });
-      return;
-    }
-
-    // Validate prices
-    const purchasePrice = parseFloat(newProduct.purchase_price);
-    const sellingPrice = parseFloat(newProduct.selling_price);
-
-    if (purchasePrice < 0 || sellingPrice < 0) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Prices cannot be negative!',
-        icon: 'error',
-        confirmButtonColor: '#ef4444'
-      });
-      return;
-    }
-
-    if (sellingPrice < purchasePrice) {
-      Swal.fire({
-        title: 'Warning!',
-        text: 'Selling price is lower than purchase price. Continue?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#f59e0b',
-        cancelButtonColor: '#6b7280',
-        confirmButtonText: 'Yes, continue!',
-        cancelButtonText: 'Cancel'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          saveProduct();
-        }
-      });
-      return;
-    }
-
-    // Validate dates
-    if (new Date(newProduct.updated_at) < new Date(newProduct.created_at)) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Updated date cannot be earlier than created date!',
-        icon: 'error',
-        confirmButtonColor: '#ef4444'
-      });
-      return;
-    }
-    
-    saveProduct();
-  };
-
-  const saveProduct = () => {
-    if (isEditMode) {
-      // Update existing product
-      setProducts(prevProducts => 
-        prevProducts.map(product => 
-          product.id === selectedProduct.id 
-            ? {
-                ...product,
-                product_name: newProduct.product_name,
-                category_id: parseInt(newProduct.category_id),
-                supplier_id: parseInt(newProduct.supplier_id),
-                brand_id: parseInt(newProduct.brand_id),
-                unit_id: parseInt(newProduct.unit_id),
-                barcode: newProduct.barcode,
-                purchase_price: parseFloat(newProduct.purchase_price),
-                selling_price: parseFloat(newProduct.selling_price),
-                status: newProduct.status,
-                created_at: newProduct.created_at,
-                updated_at: newProduct.updated_at
-              }
-            : product
-        )
-      );
-      
-      Swal.fire({
-        title: 'Updated!',
-        text: `Product ${newProduct.product_name} has been updated successfully.`,
-        icon: 'success',
-        confirmButtonColor: '#10b981'
-      });
-    } else {
-      // Add new product
-      const newProductData = {
-        id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
-        product_name: newProduct.product_name,
-        category_id: parseInt(newProduct.category_id),
-        supplier_id: parseInt(newProduct.supplier_id),
-        brand_id: parseInt(newProduct.brand_id),
-        unit_id: parseInt(newProduct.unit_id),
-        barcode: newProduct.barcode,
-        purchase_price: parseFloat(newProduct.purchase_price),
-        selling_price: parseFloat(newProduct.selling_price),
-        status: newProduct.status,
-        created_at: newProduct.created_at,
-        updated_at: newProduct.updated_at
-      };
-      
-      setProducts(prevProducts => [...prevProducts, newProductData]);
-      
-      Swal.fire({
-        title: 'Success!',
-        text: `Product ${newProduct.product_name} has been added successfully.`,
-        icon: 'success',
-        confirmButtonColor: '#10b981'
-      });
-    }
-    
-    handleCloseModal();
-  };
-
+  // ============================================
+  // RENDER
+  // ============================================
   return (
     <div className="products-table-container">
       <Navbar />
-      
+
       {/* Table Container */}
       <div className="table-container">
         <div className="table-wrapper">
@@ -379,6 +358,7 @@ function ProductsTable() {
             </div>
           </div>
 
+          {/* Products Table */}
           <table className="products-table">
             <thead>
               <tr>
@@ -396,38 +376,40 @@ function ProductsTable() {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => {
-                return (
-                  <tr key={product.id} onClick={() => handleRowClick(product)} className="clickable-row">
-                    <td>{product.id}</td>
-                    <td className="product-name">{product.product_name}</td>
-                    <td className="category-name">{getCategoryName(product.category_id)}</td>
-                    <td className="supplier-name">{getSupplierName(product.supplier_id)}</td>
-                    <td className="brand-name">{getBrandName(product.brand_id)}</td>
-                    <td className="unit-name">{getUnitName(product.unit_id)}</td>
-                    <td className="barcode">{product.barcode}</td>
-                    <td className="price">${parseFloat(product.purchase_price)}</td>
-                    <td className="price">${parseFloat(product.selling_price)}</td>
-                    <td>
-                      <span className={`status ${product.status === "Active" ? "active" : "inactive"}`}>
-                        {product.status}
-                      </span>
-                    </td>
-                    <td className="actions">
-                      <button 
-                        onClick={(e) => handleDelete(e, product)}
-                        className="action-btn delete"
-                        title="Delete"
-                      >
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-                        </svg>
-                        <span>Delete</span>
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {products.map((product) => (
+                <tr 
+                  key={product.id} 
+                  onClick={() => handleRowClick(product)} 
+                  className="clickable-row"
+                >
+                  <td>{product.id}</td>
+                  <td className="product-name">{product.product_name}</td>
+                  <td className="category-name">{getCategoryName(product.category_id)}</td>
+                  <td className="supplier-name">{getSupplierName(product.supplier_id)}</td>
+                  <td className="brand-name">{getBrandName(product.brand_id)}</td>
+                  <td className="unit-name">{getUnitName(product.unit_id)}</td>
+                  <td className="barcode">{product.barcode}</td>
+                  <td className="price">${parseFloat(product.purchase_price)}</td>
+                  <td className="price">${parseFloat(product.selling_price)}</td>
+                  <td>
+                    <span className={`status ${product.status === "Active" ? "active" : "inactive"}`}>
+                      {product.status}
+                    </span>
+                  </td>
+                  <td className="actions">
+                    <button
+                      onClick={(e) => handleDelete(e, product)}
+                      className="action-btn delete"
+                      title="Delete"
+                    >
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                      </svg>
+                      <span>Delete</span>
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -437,6 +419,7 @@ function ProductsTable() {
       {isModalOpen && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
             <div className="modal-header">
               <h2 className="modal-title">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -455,8 +438,10 @@ function ProductsTable() {
               </button>
             </div>
 
+            {/* Modal Form */}
             <form onSubmit={handleSubmit} className="modal-form">
               <div className="products-form-grid">
+                {/* Product Name */}
                 <div className="form-group">
                   <label htmlFor="product_name">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -475,6 +460,7 @@ function ProductsTable() {
                   />
                 </div>
 
+                {/* Category */}
                 <div className="form-group">
                   <label htmlFor="category_id">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -498,6 +484,7 @@ function ProductsTable() {
                   </select>
                 </div>
 
+                {/* Supplier */}
                 <div className="form-group">
                   <label htmlFor="supplier_id">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -521,6 +508,7 @@ function ProductsTable() {
                   </select>
                 </div>
 
+                {/* Brand */}
                 <div className="form-group">
                   <label htmlFor="brand_id">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -544,6 +532,7 @@ function ProductsTable() {
                   </select>
                 </div>
 
+                {/* Unit */}
                 <div className="form-group">
                   <label htmlFor="unit_id">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -567,6 +556,7 @@ function ProductsTable() {
                   </select>
                 </div>
 
+                {/* Barcode */}
                 <div className="form-group">
                   <label htmlFor="barcode">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -585,6 +575,7 @@ function ProductsTable() {
                   />
                 </div>
 
+                {/* Purchase Price */}
                 <div className="form-group">
                   <label htmlFor="purchase_price">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -604,6 +595,7 @@ function ProductsTable() {
                   />
                 </div>
 
+                {/* Selling Price */}
                 <div className="form-group">
                   <label htmlFor="selling_price">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -623,6 +615,7 @@ function ProductsTable() {
                   />
                 </div>
 
+                {/* Profit (Only in Edit Mode) */}
                 {isEditMode && (
                   <div className="form-group">
                     <label htmlFor="profit">
@@ -637,8 +630,8 @@ function ProductsTable() {
                       name="profit"
                       value={
                         newProduct.purchase_price && newProduct.selling_price
-                          ? `$${parseFloat(newProduct.selling_price) - parseFloat(newProduct.purchase_price)}`
-                          : '$0'
+                          ? `$${(parseFloat(newProduct.selling_price) - parseFloat(newProduct.purchase_price)).toFixed(2)}`
+                          : '$0.00'
                       }
                       readOnly
                       style={{ backgroundColor: '#f3f4f6', cursor: 'not-allowed' }}
@@ -646,6 +639,7 @@ function ProductsTable() {
                   </div>
                 )}
 
+                {/* Status */}
                 <div className="form-group">
                   <label htmlFor="status">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -665,6 +659,7 @@ function ProductsTable() {
                   </select>
                 </div>
 
+                {/* Created At */}
                 <div className="form-group">
                   <label htmlFor="created_at">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -682,6 +677,7 @@ function ProductsTable() {
                   />
                 </div>
 
+                {/* Updated At */}
                 <div className="form-group">
                   <label htmlFor="updated_at">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -700,6 +696,7 @@ function ProductsTable() {
                 </div>
               </div>
 
+              {/* Modal Actions */}
               <div className="modal-actions">
                 <button type="button" className="cancel-btn" onClick={handleCloseModal}>
                   <svg viewBox="0 0 24 24" fill="currentColor">
@@ -725,4 +722,3 @@ function ProductsTable() {
 }
 
 export default ProductsTable;
-

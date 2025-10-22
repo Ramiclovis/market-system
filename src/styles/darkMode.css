@@ -8,23 +8,28 @@
 [data-theme="dark"] .suppliers-table-container,
 [data-theme="dark"] .units-table-container,
 [data-theme="dark"] .users-table-container {
-  background: var(--bg-primary);
+  background: var(--bg-primary) !important;
 }
 
 /* Table Wrapper */
 [data-theme="dark"] .table-wrapper {
-  background: var(--card-bg);
+  background: var(--card-bg) !important;
   border-color: var(--border-color);
   box-shadow: 0 10px 25px var(--shadow);
 }
 
 /* Table */
+[data-theme="dark"] .products-table,
+[data-theme="dark"] table {
+  background: var(--card-bg) !important;
+}
+
 [data-theme="dark"] table tbody tr {
   border-bottom-color: var(--border-color);
 }
 
 [data-theme="dark"] table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05) !important;
 }
 
 [data-theme="dark"] table td {
@@ -36,8 +41,9 @@
 [data-theme="dark"] .category-name,
 [data-theme="dark"] .company-name,
 [data-theme="dark"] .unit-name,
-[data-theme="dark"] .user-name {
-  color: var(--text-primary);
+[data-theme="dark"] .user-name,
+[data-theme="dark"] .supplier-name {
+  color: var(--text-primary) !important;
 }
 
 [data-theme="dark"] .brand-description,
@@ -46,13 +52,23 @@
   color: var(--text-secondary);
 }
 
+/* Products Table Specific Styles */
+[data-theme="dark"] .products-table .barcode {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .products-table .price {
+  color: #10b981 !important;
+}
+
 /* Modal */
 [data-theme="dark"] .modal-overlay {
   background: rgba(0, 0, 0, 0.8);
 }
 
 [data-theme="dark"] .modal-container {
-  background: var(--card-bg);
+  background: var(--card-bg) !important;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
 
@@ -60,8 +76,12 @@
   border-bottom-color: var(--border-color);
 }
 
+[data-theme="dark"] .modal-title {
+  color: var(--text-primary);
+}
+
 [data-theme="dark"] .modal-form {
-  background: var(--card-bg);
+  background: var(--card-bg) !important;
 }
 
 [data-theme="dark"] .form-group label {
@@ -124,5 +144,24 @@
 
 [data-theme="dark"] .login-subtitle {
   color: var(--text-secondary);
+}
+
+/* Scrollbar Styling for Dark Mode */
+[data-theme="dark"] .products-table-container::-webkit-scrollbar-track,
+[data-theme="dark"] .table-container::-webkit-scrollbar-track,
+[data-theme="dark"] .modal-container::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .products-table-container::-webkit-scrollbar-thumb,
+[data-theme="dark"] .table-container::-webkit-scrollbar-thumb,
+[data-theme="dark"] .modal-container::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+}
+
+[data-theme="dark"] .products-table-container::-webkit-scrollbar-thumb:hover,
+[data-theme="dark"] .table-container::-webkit-scrollbar-thumb:hover,
+[data-theme="dark"] .modal-container::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
 }
 

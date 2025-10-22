@@ -183,3 +183,35 @@ export const getSupplierNameById = (supplierId, suppliers = initialSuppliers) =>
   return supplier ? supplier.supplier_name : "Unknown";
 };
 
+// Initial products data
+export const initialProducts = [
+  {
+    id: 1,
+    product_name: "Laptop Computer",
+    category_id: 1,
+    supplier_id: 1,
+    brand_id: 4,
+    unit_id: 1,
+    barcode: "1234567890123",
+    purchase_price: 800.00,
+    selling_price: 1200.00,
+    status: "Active",
+    created_at: "2024-01-15",
+    updated_at: "2024-02-20"
+  },
+  {
+    id: 2,
+    product_name: "Office Desk",
+    category_id: 2,
+    supplier_id: 3,
+    brand_id: 5,
+    unit_id: 1,
+    barcode: "1234567890124",
+    purchase_price: 150.00,
+    selling_price: 250.00,
+    status: "Active",
+    created_at: "2024-02-01",
+    updated_at: "2024-03-15"
+  }
+];
+
