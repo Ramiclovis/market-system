@@ -34,6 +34,9 @@ function Dashboard() {
 
   const handleProductsClick = () => {
     navigate("/products");
+  }; 
+  const handlePurchasesClick = () => {
+    navigate("/purchases");
   };
 
   return (
@@ -111,7 +114,19 @@ function Dashboard() {
               </svg>
             </div>
             <h3 className="module-title">Units</h3>
-          </div>
+          </div>   
+
+
+          <div className="module-card purchases" onClick={handlePurchasesClick}>
+            <div className="module-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H3V8h2v4h2V8h2v4h2V8h2v4h2V8h2v4h2V8h2v8z"/>
+              </svg>
+            </div>
+            <h3 className="module-title">Purchases</h3>
+          </div> 
+
+      
         </div>
       </div>
 
