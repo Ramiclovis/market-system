@@ -183,6 +183,29 @@ export const getSupplierNameById = (supplierId, suppliers = initialSuppliers) =>
   return supplier ? supplier.supplier_name : "Unknown";
 };
 
+// Initial categories data (must match CategoriesTable.jsx)
+export const initialCategories = [
+  { id: 1, name: "Beverages", description: "Drinks and beverages", parentId: "", isActive: "Active", createdAt: "2024-01-01", updatedAt: "2024-01-10" },
+  { id: 2, name: "Snacks", description: "Chips, nuts, and snacks", parentId: "", isActive: "Active", createdAt: "2024-02-01", updatedAt: "2024-02-05" },
+  { id: 3, name: "Soft Drinks", description: "Sodas and colas", parentId: "1", isActive: "Inactive", createdAt: "2024-02-15", updatedAt: "2024-03-01" }
+];
+
+// Get simple category list for dropdowns (only active main categories)
+export const getCategoryList = () => {
+  return initialCategories
+    .filter(category => category.isActive === "Active" && !category.parentId)
+    .map(category => ({
+      id: category.id,
+      name: category.name
+    }));
+};
+
+// Get category name by ID
+export const getCategoryNameById = (categoryId, categories = initialCategories) => {
+  const category = categories.find(c => c.id === categoryId);
+  return category ? category.name : "Unknown";
+};
+
 // Initial products data
 export const initialProducts = [
   {

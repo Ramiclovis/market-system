@@ -9,7 +9,7 @@ import SuppliersTable from "./pages/suppliers/SuppliersTable";
 import BrandsTable from "./pages/brands/BrandsTable";
 import UnitsTable from "./pages/units/UnitsTable";
 import ProductsTable from "./pages/products/ProductsTable"; 
-import PurchasesTable from "./pages/purchases/PurchasesTable";
+import PurchaseOrderDetails from "./pages/purchases/purchase_order_details";
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
         <Route path="/brands" element={<BrandsTable />} />
         <Route path="/units" element={<UnitsTable />} />
         <Route path="/products" element={<ProductsTable />} />
-        <Route path="/purchases" element={<PurchasesTable />} />
+        <Route path="/purchase-order-details" element={<PurchaseOrderDetails />} />
         
         <Route path="*" element={<Login />} />
       </Routes>
